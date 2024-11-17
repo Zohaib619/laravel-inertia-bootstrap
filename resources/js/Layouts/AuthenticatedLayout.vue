@@ -3,11 +3,7 @@ import { onMounted } from 'vue';
 import AuthNavbar from '@/Components/Auth/Navbar.vue';
 import AuthSidebar from '@/Components/Auth/Sidebar.vue';
 import { Link } from '@inertiajs/vue3';
-import { initFlowbite } from 'flowbite';
 
-onMounted(() => {
-    initFlowbite();
-})
 </script>
 
 <template>
