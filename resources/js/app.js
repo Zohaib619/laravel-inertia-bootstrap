@@ -1,6 +1,6 @@
 import '../css/app.css';
-import '../js/bootstrap';
 import "@fortawesome/fontawesome-free/css/all.css"
+import "bootstrap/dist/js/bootstrap"
 import "@/Assets/css/style.css"
 
 import { createInertiaApp } from '@inertiajs/vue3';
