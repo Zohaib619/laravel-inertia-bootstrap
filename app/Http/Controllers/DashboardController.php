@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     function index(){
         $user = User::count();
-        return inertia("Dashboard",
+        return inertia("Dashboard/index",
     compact("user"));
 
     }
