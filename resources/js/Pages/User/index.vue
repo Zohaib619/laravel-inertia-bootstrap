@@ -1,6 +1,7 @@
 <script setup>
 import Breadcrumb from '@/Components/Dashboard/Breadcrumb.vue';
 import Heading from '@/Components/Dashboard/Heading.vue';
+import { usePermission } from '@/Composables/permission';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
@@ -13,11 +14,12 @@ defineProps({
         type: Array
     }
 })
+const {hasPermission} = usePermission();
 </script>
 <template>
     <div class="d-flex justify-content-between align-items-center">
         <Heading>User</Heading>
-        <Link class="btn btn-dark" :href="route('users.create')">{{ __("Create User") }}</Link>
+        <Link class="btn btn-dark" v-if="hasPermission('create-user')" :href="route('users.create')">{{ __("Create User") }}</Link>
     </div>
 
     <div class="table-responsive rounded overflow-hidden">
@@ -44,8 +46,8 @@ defineProps({
                         {{ user.email }}
                     </td>
                     <td class="px-6 py-4 ">
-                        <a href="#" class="font-medium me-1 text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        <a href="#" class="font-medium ms-1 text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                        <Link :href="route('users.edit', user)" class="btn btn-secondary">Edit</Link>
+                        <Link href="#" class="btn ms-1 btn-danger">Delete</Link>
                     </td>
                 </tr>
             </tbody>

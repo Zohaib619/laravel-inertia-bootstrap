@@ -1,5 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'; 
+import { usePermission } from '@/Composables/permission';
+const {hasPermission} = usePermission();
 </script>
 <template>
     <div id="layoutSidenav_nav">
@@ -21,7 +23,7 @@ import { Link } from '@inertiajs/vue3';
                     <div class="collapse" id="collapseUserManagement" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <Link class="nav-link" :href="route('users.index')">Users</Link>
+                            <Link v-if="hasPermission('list-user')" class="nav-link" :href="route('users.index')">Users</Link>
                             <Link class="nav-link" :href="route('roles.index')">Role</Link>
                         </nav>
                     </div>

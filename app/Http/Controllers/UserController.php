@@ -6,10 +6,20 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+    static function  middleware(){
+        return [
+            new Middleware("can:list-user", only: ["index", "show"]),
+            new Middleware("can:create-user", only: ["create", "store"]),
+            new Middleware("can:edit-user", only: ["edit", "update"]),
+            new Middleware("can:delete-user", only: ["destory"]),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -58,7 +68,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::get();
+        $user->load('roles');
+        $user->role_id = $user->roles->pluck('id')->first();    
+        return inertia("User/edit",
+            compact("user", "roles"));
     }
 
     /**
