@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -23,15 +25,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::get();
+        return inertia("User/create", 
+        compact("roles"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        $role = Role::findById($request->role_id);
+        $user->assignRole($role);
+        return to_route("users.index")->with("message", "User Stored");
     }
 
     /**

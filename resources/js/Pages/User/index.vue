@@ -2,6 +2,7 @@
 import Breadcrumb from '@/Components/Dashboard/Breadcrumb.vue';
 import Heading from '@/Components/Dashboard/Heading.vue';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+import { Link } from '@inertiajs/vue3';
 
 defineOptions({
     layout: DashboardLayout
@@ -14,8 +15,10 @@ defineProps({
 })
 </script>
 <template>
-    <Heading>User</Heading>
-    <Breadcrumb></Breadcrumb>
+    <div class="d-flex justify-content-between align-items-center">
+        <Heading>User</Heading>
+        <Link class="btn btn-dark" :href="route('users.create')">{{ __("Create User") }}</Link>
+    </div>
 
     <div class="table-responsive rounded overflow-hidden">
         <table class="table table-bordered">
