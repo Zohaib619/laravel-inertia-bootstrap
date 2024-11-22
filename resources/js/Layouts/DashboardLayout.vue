@@ -1,6 +1,14 @@
 <script setup>
 import Navbar from '@/Components/Dashboard/Navbar.vue';
 import Sidebar from '@/Components/Dashboard/Sidebar.vue';
+
+// function initializeSidebarState() {
+//     if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+//         document.body.classList.add('sb-sidenav-toggled');
+//     }
+// }
+
+// initializeSidebarState();
 </script>
 <template>
     <Navbar />
