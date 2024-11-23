@@ -1,7 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'; 
 import { usePermission } from '@/Composables/permission';
-const {hasPermission} = usePermission();
+const {hasPermission, hasRole} = usePermission();
 </script>
 <template>
     <div id="layoutSidenav_nav">
@@ -24,15 +24,12 @@ const {hasPermission} = usePermission();
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <Link v-if="hasPermission('list-user')" class="nav-link" :href="route('users.index')">Users</Link>
-                            <Link class="nav-link" :href="route('roles.index')">Role</Link>
+                            <Link v-if="hasRole('Admin')" class="nav-link" :href="route('roles.index')">Role</Link>
                         </nav>
                     </div>
                     <!-- user management end -->
-
                     <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-
-
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         {{ __("Profile") }}
                     </a>
