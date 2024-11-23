@@ -31,12 +31,12 @@ function toggleSidebar() {
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><Link class="dropdown-item" :href="route('home')">{{ __("Front Website") }}</Link></li>
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><Link class="dropdown-item" :href="route('profile.edit')">{{ __("Profile") }}</Link></li>
                     <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><Link class="dropdown-item text-danger fw-bold" :href="route('logout')">Logout</Link></li>
                 </ul>
             </li>
         </ul>

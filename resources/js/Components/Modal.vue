@@ -8,7 +8,7 @@ const props = defineProps({
     },
     maxWidth: {
         type: String,
-        default: '2xl',
+        default: 'lg', // Default to a size Bootstrap uses (lg)
     },
     closeable: {
         type: Boolean,
@@ -22,9 +22,9 @@ watch(
     () => props.show,
     () => {
         if (props.show) {
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('modal-open'); // Prevent scroll (Bootstrap style)
         } else {
-            document.body.style.overflow = null;
+            document.body.classList.remove('modal-open');
         }
     },
 );
@@ -45,64 +45,33 @@ onMounted(() => document.addEventListener('keydown', closeOnEscape));
 
 onUnmounted(() => {
     document.removeEventListener('keydown', closeOnEscape);
-    document.body.style.overflow = null;
+    document.body.classList.remove('modal-open');
 });
 
 const maxWidthClass = computed(() => {
+    // Map to Bootstrap modal sizes
     return {
-        sm: 'sm:max-w-sm',
-        md: 'sm:max-w-md',
-        lg: 'sm:max-w-lg',
-        xl: 'sm:max-w-xl',
-        '2xl': 'sm:max-w-2xl',
-    }[props.maxWidth];
+        sm: 'modal-sm',
+        md: '',
+        lg: 'modal-lg',
+        xl: 'modal-xl',
+    }[props.maxWidth] || 'modal-lg'; // Default to `lg` if no match
 });
 </script>
 
 <template>
     <Teleport to="body">
-        <Transition leave-active-class="duration-200">
-            <div
-                v-show="show"
-                class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0"
-                scroll-region
-            >
-                <Transition
-                    enter-active-class="ease-out duration-300"
-                    enter-from-class="opacity-0"
-                    enter-to-class="opacity-100"
-                    leave-active-class="ease-in duration-200"
-                    leave-from-class="opacity-100"
-                    leave-to-class="opacity-0"
-                >
-                    <div
-                        v-show="show"
-                        class="fixed inset-0 transform transition-all"
-                        @click="close"
-                    >
-                        <div
-                            class="absolute inset-0 bg-gray-500 opacity-75"
-                        />
+        <div v-if="show" class="modal fade show d-block" tabindex="-1" role="dialog" @click.self="close">
+            <div class="modal-dialog" :class="maxWidthClass" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <slot />
                     </div>
-                </Transition>
-
-                <Transition
-                    enter-active-class="ease-out duration-300"
-                    enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-                    leave-active-class="ease-in duration-200"
-                    leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-                    leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                >
-                    <div
-                        v-show="show"
-                        class="mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full"
-                        :class="maxWidthClass"
-                    >
-                        <slot v-if="show" />
-                    </div>
-                </Transition>
+                </div>
             </div>
-        </Transition>
+        </div>
+
+        <!-- Modal Backdrop -->
+        <div v-if="show" class="modal-backdrop fade show"></div>
     </Teleport>
 </template>
