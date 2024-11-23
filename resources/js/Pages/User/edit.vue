@@ -23,7 +23,7 @@ const form = useForm({
 </script>
 
 <template>
-    <h1>{{ __("Create User") }}</h1>
+    <h1>{{ __("Update User") }}</h1>
     <div class="card">
         <div class="card-body">
             <form @submit.prevent="form.put(route('users.update'))">

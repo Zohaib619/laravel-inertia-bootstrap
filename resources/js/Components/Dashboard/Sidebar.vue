@@ -23,8 +23,8 @@ const {hasPermission, hasRole} = usePermission();
                     <div class="collapse" id="collapseUserManagement" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <Link v-if="hasPermission('list-user')" class="nav-link" :href="route('users.index')">Users</Link>
-                            <Link v-if="hasRole('Admin')" class="nav-link" :href="route('roles.index')">Role</Link>
+                            <Link v-if="hasPermission('user.list')" class="nav-link" :href="route('users.index')">Users</Link>
+                            <Link v-if="hasRole('admin')" class="nav-link" :href="route('roles.index')">Role</Link>
                         </nav>
                     </div>
                     <!-- user management end -->
@@ -33,7 +33,6 @@ const {hasPermission, hasRole} = usePermission();
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         {{ __("Profile") }}
                     </a>
-
                 </div>
             </div>
             <div class="sb-sidenav-footer">

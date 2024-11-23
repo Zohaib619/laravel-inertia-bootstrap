@@ -11,7 +11,7 @@ Route::get('/contact', [WebsiteController::class, "contact"])->name("contact");
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware("role:Admin")->group(function(){
+    Route::middleware("role:admin")->group(function(){
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
         Route::resource("/roles", RoleController::class);
         Route::resource("/permissions", PermissionController::class);

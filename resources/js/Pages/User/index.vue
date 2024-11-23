@@ -19,7 +19,7 @@ const {hasPermission} = usePermission();
 <template>
     <div class="d-flex justify-content-between align-items-center">
         <Heading>User</Heading>
-        <Link class="btn btn-dark" v-if="hasPermission('create-user')" :href="route('users.create')">{{ __("Create User") }}</Link>
+        <Link class="btn btn-dark" v-if="hasPermission('user.create')" :href="route('users.create')">{{ __("Create User") }}</Link>
     </div>
 
     <div class="table-responsive rounded overflow-hidden">
@@ -46,8 +46,8 @@ const {hasPermission} = usePermission();
                         {{ user.email }}
                     </td>
                     <td class="px-6 py-4 ">
-                        <Link :href="route('users.edit', user)" class="btn btn-secondary">Edit</Link>
-                        <Link href="#" class="btn ms-1 btn-danger">Delete</Link>
+                        <Link v-if="hasPermission('user.edit')" :href="route('users.edit', user)" class="btn btn-secondary">Edit</Link>
+                        <Link v-if="hasPermission('user.delete')" href="#" class="btn ms-1 btn-danger">Delete</Link>
                     </td>
                 </tr>
             </tbody>

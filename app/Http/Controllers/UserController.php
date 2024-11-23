@@ -8,16 +8,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class UserController extends Controller implements HasMiddleware
 {
     static function  middleware(){
         return [
-            new Middleware("can:list-user", only: ["index", "show"]),
-            new Middleware("can:create-user", only: ["create", "store"]),
-            new Middleware("can:edit-user", only: ["edit", "update"]),
-            new Middleware("can:delete-user", only: ["destory"]),
+            new Middleware("can:user.list", only: ["index", "show"]),
+            new Middleware("can:user.create", only: ["create", "store"]),
+            new Middleware("can:user.edit", only: ["edit", "update"]),
+            new Middleware("can:user.delete", only: ["destory"]),
         ];
     }
     /**

@@ -5,3 +5,11 @@
         />
     </svg>
 </template>
+<style scoped>
+svg{
+    height: 80px;
+    width: 80px;
+    margin: auto;
+    display: block;
+}
+</style>
