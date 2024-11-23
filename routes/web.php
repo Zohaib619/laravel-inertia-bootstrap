@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{AdminController, DashboardController, PermissionController, RoleController, UserController, WebsiteController};
+use App\Http\Controllers\{AdminController, DashboardController, PermissionController, RoleController, SettingController, UserController, WebsiteController};
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource("users", UserController::class);
+
+    Route::get("setting", [SettingController::class, "index"])->name("setting.index");
+    Route::put("setting-update", [SettingController::class, "update"])->name("setting.update");
 });
 
 require __DIR__.'/auth.php';

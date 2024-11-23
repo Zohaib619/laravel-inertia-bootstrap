@@ -29,7 +29,15 @@ const user = usePage().props.auth.user;
                         <Link class="nav-link" :href="route('contact')">{{ __('Contact') }}</Link>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
+                <ul v-if="user?.name" class="navbar-nav">
+                    <li class="nav-item">
+                        <Link class="nav-link" :href="route('dashboard')">{{ __("Dashboard") }}</Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link class="nav-link text-danger" :href="route('logout')">{{ __("Logout") }}</Link>
+                    </li>
+                </ul>
+                <ul v-else class="navbar-nav">
                     <li class="nav-item">
                         <Link class="nav-link" :href="route('register')">{{ __("Register") }}</Link>
                     </li>

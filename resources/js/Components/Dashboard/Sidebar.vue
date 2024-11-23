@@ -33,6 +33,13 @@ const {hasPermission, hasRole} = usePermission();
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         {{ __("Profile") }}
                     </a>
+
+                    <!-- Setting -->
+                    <Link class="nav-link" :href="route('setting.index')">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        {{ __("Setting") }}
+                    </Link>
+                    <!-- Setting end -->
                 </div>
             </div>
             <div class="sb-sidenav-footer">
